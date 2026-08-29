@@ -3,936 +3,903 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>SmartBlood - Blood Donation & Emergency Support</title>
-
+    <title>SmartBlood</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- ================= HEADER ================= -->
+<header class="header">
+    <div class="logo">🩸 SmartBlood</div>
+    <div class="status">● System Online</div>
+</header>
 
-    <header class="header">
+<main>
 
-        <div class="logo">
-            🩸 SmartBlood
-        </div>
+<!-- ================= REGISTER ================= -->
 
-        <div class="status">
-            ● System Online
-        </div>
+<section id="registerScreen" class="screen active">
 
-    </header>
+    <div class="hero">
+        <div class="hero-icon">🩸</div>
+        <h1>Welcome to SmartBlood</h1>
+        <p>
+            Connecting Donors, Patients and Blood Banks
+            through one smart platform.
+        </p>
+    </div>
 
+    <div class="card">
 
-    <!-- ================= MAIN APP ================= -->
+        <h2>Create Your Profile</h2>
 
-    <main>
+        <p class="subtitle">
+            Register first to access SmartBlood services.
+        </p>
 
-        <!-- ================= REGISTER ================= -->
+        <form id="registerForm">
 
-        <section id="registerScreen" class="screen active">
+            <div class="form-grid">
 
-            <div class="hero">
-
-                <div class="hero-icon">
-                    🩸
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your name"
+                        required
+                    >
                 </div>
 
-                <h1>Welcome to SmartBlood</h1>
+                <div class="input-group">
+                    <label>Age</label>
+                    <input
+                        type="number"
+                        id="age"
+                        min="1"
+                        max="120"
+                        placeholder="Enter age"
+                        required
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label>Gender</label>
+                    <select id="gender" required>
+                        <option value="">Select Gender</option>
+                        <option>Female</option>
+                        <option>Male</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Height (cm)</label>
+                    <input
+                        type="number"
+                        id="height"
+                        placeholder="Height"
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label>Weight (kg)</label>
+                    <input
+                        type="number"
+                        id="weight"
+                        placeholder="Weight"
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label>Phone / Email</label>
+                    <input
+                        type="text"
+                        id="contact"
+                        placeholder="Phone or Email"
+                        required
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label>Blood Group</label>
+
+                    <select id="bloodGroup" required>
+
+                        <option value="">
+                            Select Blood Group
+                        </option>
+
+                        <option>A+</option>
+                        <option>A-</option>
+                        <option>B+</option>
+                        <option>B-</option>
+                        <option>AB+</option>
+                        <option>AB-</option>
+                        <option>O+</option>
+                        <option>O-</option>
+
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>District</label>
+
+                    <input
+                        type="text"
+                        id="district"
+                        placeholder="Your district"
+                        required
+                    >
+                </div>
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Address</label>
+
+                <textarea
+                    id="address"
+                    placeholder="Enter your address"
+                    required
+                ></textarea>
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Any Health Issues?</label>
+
+                <textarea
+                    id="healthIssues"
+                    placeholder="Enter health issues or type None"
+                ></textarea>
+
+            </div>
+
+            <button class="primary-btn" type="submit">
+                Register & Continue →
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ROLE SELECTION ================= -->
+
+<section id="roleScreen" class="screen">
+
+    <div class="card role-card">
+
+        <div class="section-icon">🩸</div>
+
+        <h1>Choose Your Role</h1>
+
+        <p class="subtitle">
+            Select how you want to use SmartBlood.
+        </p>
+
+        <div class="role-grid">
+
+            <!-- DONOR -->
+
+            <button
+                class="role-box donor-box"
+                id="donorBtn"
+            >
+
+                <span class="role-icon">🩸</span>
+
+                <h2>DONOR</h2>
 
                 <p>
-                    Connecting Donors, Patients and Blood Banks
-                    through one smart platform.
+                    Register as a blood donor
+                    and help save lives.
+                </p>
+
+            </button>
+
+
+            <!-- PATIENT -->
+
+            <button
+                class="role-box patient-box"
+                id="patientBtn"
+            >
+
+                <span class="role-icon">🏥</span>
+
+                <h2>PATIENT</h2>
+
+                <p>
+                    Request blood and find
+                    compatible donors.
+                </p>
+
+            </button>
+
+
+            <!-- BLOOD BANK -->
+
+            <button
+                class="role-box bank-box"
+                id="bloodBankBtn"
+            >
+
+                <span class="role-icon">🏦</span>
+
+                <h2>BLOOD BANK</h2>
+
+                <p>
+                    Register and manage
+                    blood inventory.
+                </p>
+
+            </button>
+
+        </div>
+
+        <button
+            class="back-btn"
+            id="backRegister"
+        >
+            ← Back to Registration
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= DONOR ================= -->
+
+<section id="donorScreen" class="screen">
+
+    <div class="dashboard">
+
+        <div class="dashboard-header">
+
+            <div>
+                <h1>🩸 Donor Dashboard</h1>
+
+                <p>
+                    Thank you for helping save lives.
+                </p>
+            </div>
+
+            <button
+                class="logout-btn"
+                id="donorLogout"
+            >
+                Logout
+            </button>
+
+        </div>
+
+
+        <div class="card">
+
+            <button
+                class="back-btn"
+                id="backFromDonor"
+            >
+                ← Back to Choose Role
+            </button>
+
+            <h2>Donor Profile</h2>
+
+            <div
+                id="donorProfile"
+                class="profile-box"
+            ></div>
+
+
+            <div class="form-grid">
+
+                <div class="input-group">
+
+                    <label>
+                        Donation Availability
+                    </label>
+
+                    <select id="availability">
+
+                        <option>
+                            Available Now
+                        </option>
+
+                        <option>
+                            Available This Week
+                        </option>
+
+                        <option>
+                            Not Available
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Preferred Area / Hospital
+                    </label>
+
+                    <input
+                        id="donorArea"
+                        placeholder="Hospital or area"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="primary-btn"
+                id="saveDonor"
+            >
+                Save Donor Profile
+            </button>
+
+
+            <div
+                id="donorMessage"
+                class="success-message"
+            ></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PATIENT ================= -->
+
+<section id="patientScreen" class="screen">
+
+    <div class="dashboard">
+
+        <div class="dashboard-header">
+
+            <div>
+
+                <h1>🏥 Patient Dashboard</h1>
+
+                <p>
+                    Request blood when you need it.
                 </p>
 
             </div>
 
+            <button
+                class="logout-btn"
+                id="patientLogout"
+            >
+                Logout
+            </button>
 
-            <div class="card">
+        </div>
 
-                <h2>Create Your Profile</h2>
 
-                <p class="subtitle">
-                    Register first to access SmartBlood services.
+        <div class="card">
+
+            <button
+                class="back-btn"
+                id="backFromPatient"
+            >
+                ← Back to Choose Role
+            </button>
+
+            <h2>Blood Request</h2>
+
+            <div class="form-grid">
+
+                <div class="input-group">
+
+                    <label>
+                        Required Blood Group
+                    </label>
+
+                    <select id="requiredGroup">
+
+                        <option value="">
+                            Select Blood Group
+                        </option>
+
+                        <option>A+</option>
+                        <option>A-</option>
+                        <option>B+</option>
+                        <option>B-</option>
+                        <option>AB+</option>
+                        <option>AB-</option>
+                        <option>O+</option>
+                        <option>O-</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Required Units
+                    </label>
+
+                    <input
+                        id="units"
+                        type="number"
+                        min="1"
+                        max="20"
+                        value="1"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Hospital Name
+                    </label>
+
+                    <input
+                        id="hospital"
+                        placeholder="Hospital name"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        District
+                    </label>
+
+                    <input
+                        id="patientDistrict"
+                        placeholder="District"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Urgency
+                    </label>
+
+                    <select id="urgency">
+
+                        <option>Normal</option>
+                        <option>Urgent</option>
+                        <option>Emergency</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>
+                    Additional Information
+                </label>
+
+                <textarea
+                    id="note"
+                    placeholder="Additional information"
+                ></textarea>
+
+            </div>
+
+
+            <button
+                class="primary-btn"
+                id="findDonors"
+            >
+                🔎 Find Matching Donors
+            </button>
+
+
+            <div id="matchResult"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= BLOOD BANK ================= -->
+
+<section id="bloodBankScreen" class="screen">
+
+    <div class="dashboard">
+
+        <div class="dashboard-header">
+
+            <div>
+
+                <h1>🏦 Blood Bank Dashboard</h1>
+
+                <p>
+                    Register and manage blood availability.
                 </p>
 
-
-                <form id="registerForm">
-
-                    <div class="form-grid">
-
-                        <div class="input-group">
-
-                            <label>Full Name</label>
-
-                            <input
-                                type="text"
-                                id="name"
-                                placeholder="Enter your name"
-                                required
-                            >
-
-                        </div>
-
-
-                        <div class="input-group">
-
-                            <label>Age</label>
-
-                            <input
-                                type="number"
-                                id="age"
-                                placeholder="Enter age"
-                                min="1"
-                                max="120"
-                                required
-                            >
-
-                        </div>
-
-
-                        <div class="input-group">
-
-                            <label>Gender</label>
-
-                            <select id="gender" required>
-
-                                <option value="">
-                                    Select Gender
-                                </option>
-
-                                <option>Female</option>
-
-                                <option>Male</option>
-
-                                <option>Other</option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="input-group">
-
-                            <label>Height (cm)</label>
-
-                            <input
-                                type="number"
-                                id="height"
-                                placeholder="Height"
-                            >
-
-                        </div>
-
-
-                        <div class="input-group">
-
-                            <label>Weight (kg)</label>
-
-                            <input
-                                type="number"
-                                id="weight"
-                                placeholder="Weight"
-                            >
-
-                        </div>
-
-
-                        <div class="input-group">
-
-                            <label>Phone / Email</label>
-
-                            <input
-                                type="text"
-                                id="contact"
-                                placeholder="Phone or Email"
-                                required
-                            >
-
-                        </div>
-
-
-                        <div class="input-group">
-
-                            <label>Blood Group</label>
-
-                            <select id="bloodGroup" required>
-
-                                <option value="">
-                                    Select Blood Group
-                                </option>
-
-                                <option>A+</option>
-                                <option>A-</option>
-
-                                <option>B+</option>
-                                <option>B-</option>
-
-                                <option>AB+</option>
-                                <option>AB-</option>
-
-                                <option>O+</option>
-                                <option>O-</option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="input-group">
-
-                            <label>District</label>
-
-                            <input
-                                type="text"
-                                id="district"
-                                placeholder="Your district"
-                                required
-                            >
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="input-group">
-
-                        <label>Address</label>
-
-                        <textarea
-                            id="address"
-                            placeholder="Enter your address"
-                            required
-                        ></textarea>
-
-                    </div>
-
-
-                    <div class="input-group">
-
-                        <label>Any Health Issues?</label>
-
-                        <textarea
-                            id="healthIssues"
-                            placeholder="Enter health issues or type None"
-                        ></textarea>
-
-                    </div>
-
-
-                    <button
-                        type="submit"
-                        class="primary-btn"
-                    >
-
-                        Register & Continue →
-
-                    </button>
-
-                </form>
-
             </div>
 
-        </section>
+            <button
+                class="logout-btn"
+                id="bankLogout"
+            >
+                Logout
+            </button>
+
+        </div>
 
 
-        <!-- ================= ROLE SELECTION ================= -->
+        <!-- BANK REGISTRATION -->
 
-        <section id="roleScreen" class="screen">
+        <div class="card">
 
-            <div class="card role-card">
+            <button
+                class="back-btn"
+                id="backFromBank"
+            >
+                ← Back to Choose Role
+            </button>
 
-                <div class="section-icon">
-                    🩸
-                </div>
+            <h2>Blood Bank Registration</h2>
 
-                <h1>Choose Your Role</h1>
+            <div class="form-grid">
 
-                <p class="subtitle">
-                    Select how you want to use SmartBlood.
-                </p>
+                <div class="input-group">
 
+                    <label>
+                        Blood Bank Name
+                    </label>
 
-                <div class="role-grid">
-
-
-                    <!-- DONOR -->
-
-                    <button
-                        class="role-box donor-box"
-                        id="donorBtn"
+                    <input
+                        id="bankName"
+                        placeholder="Enter blood bank name"
                     >
-
-                        <span class="role-icon">
-                            🩸
-                        </span>
-
-                        <h2>DONOR</h2>
-
-                        <p>
-                            Register as a blood donor
-                            and help save lives.
-                        </p>
-
-                    </button>
-
-
-                    <!-- PATIENT -->
-
-                    <button
-                        class="role-box patient-box"
-                        id="patientBtn"
-                    >
-
-                        <span class="role-icon">
-                            🏥
-                        </span>
-
-                        <h2>PATIENT</h2>
-
-                        <p>
-                            Request blood and find
-                            compatible donors.
-                        </p>
-
-                    </button>
-
-
-                    <!-- BLOOD BANK -->
-
-                    <button
-                        class="role-box bank-box"
-                        id="bloodBankBtn"
-                    >
-
-                        <span class="role-icon">
-                            🏦
-                        </span>
-
-                        <h2>BLOOD BANK</h2>
-
-                        <p>
-                            Register and manage
-                            blood inventory.
-                        </p>
-
-                    </button>
 
                 </div>
 
 
-                <button
-                    class="back-btn"
-                    id="backRegister"
-                >
+                <div class="input-group">
 
-                    ← Edit Registration
+                    <label>
+                        Registration / License ID
+                    </label>
 
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= DONOR ================= -->
-
-        <section id="donorScreen" class="screen">
-
-            <div class="dashboard">
-
-                <div class="dashboard-header">
-
-                    <div>
-
-                        <h1>🩸 Donor Dashboard</h1>
-
-                        <p>
-                            Thank you for helping save lives.
-                        </p>
-
-                    </div>
-
-                    <button
-                        class="logout-btn"
-                        id="donorLogout"
+                    <input
+                        id="bankLicense"
+                        placeholder="License ID"
                     >
-                        Logout
-                    </button>
 
                 </div>
 
 
-                <div class="card">
+                <div class="input-group">
 
-                    <h2>Donor Profile</h2>
+                    <label>
+                        Contact Number
+                    </label>
 
-                    <div
-                        id="donorProfile"
-                        class="profile-box"
-                    ></div>
-
-
-                    <div class="form-grid">
-
-                        <div class="input-group">
-
-                            <label>
-                                Donation Availability
-                            </label>
-
-                            <select id="availability">
-
-                                <option>
-                                    Available Now
-                                </option>
-
-                                <option>
-                                    Available This Week
-                                </option>
-
-                                <option>
-                                    Not Available
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="input-group">
-
-                            <label>
-                                Preferred Area / Hospital
-                            </label>
-
-                            <input
-                                id="donorArea"
-                                placeholder="Hospital or area"
-                            >
-
-                        </div>
-
-                    </div>
-
-
-                    <button
-                        class="primary-btn"
-                        id="saveDonor"
+                    <input
+                        id="bankContact"
+                        placeholder="Phone number"
                     >
 
-                        Save Donor Profile
-
-                    </button>
+                </div>
 
 
-                    <div
-                        id="donorMessage"
-                        class="success-message"
-                    ></div>
+                <div class="input-group">
+
+                    <label>
+                        Email
+                    </label>
+
+                    <input
+                        id="bankEmail"
+                        type="email"
+                        placeholder="Email"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        District
+                    </label>
+
+                    <input
+                        id="bankDistrict"
+                        placeholder="District"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Working Hours
+                    </label>
+
+                    <input
+                        id="bankHours"
+                        placeholder="Example: 24/7"
+                    >
 
                 </div>
 
             </div>
 
-        </section>
+
+            <div class="input-group">
+
+                <label>
+                    Blood Bank Address
+                </label>
+
+                <textarea
+                    id="bankAddress"
+                    placeholder="Full address"
+                ></textarea>
+
+            </div>
 
 
-        <!-- ================= PATIENT ================= -->
+            <button
+                class="primary-btn"
+                id="registerBank"
+            >
+                🏦 Register Blood Bank
+            </button>
 
-        <section id="patientScreen" class="screen">
 
-            <div class="dashboard">
+            <div
+                id="bankMessage"
+                class="success-message"
+            ></div>
 
-                <div class="dashboard-header">
+        </div>
 
-                    <div>
 
-                        <h1>🏥 Patient Dashboard</h1>
+        <!-- INVENTORY -->
 
-                        <p>
-                            Request blood when you need it.
-                        </p>
+        <div class="card">
 
-                    </div>
+            <button
+                class="back-btn"
+                id="backToBankTop"
+            >
+                ↑ Back to Bank Registration
+            </button>
 
-                    <button
-                        class="logout-btn"
-                        id="patientLogout"
+            <h2>Blood Inventory</h2>
+
+            <p class="subtitle">
+                Enter available blood units.
+            </p>
+
+
+            <div class="blood-grid">
+
+                <div class="blood-item">
+                    <b>A+</b>
+                    <input
+                        type="number"
+                        id="Apos"
+                        min="0"
+                        value="0"
                     >
-                        Logout
-                    </button>
+                    <span>Units</span>
+                </div>
+
+                <div class="blood-item">
+                    <b>A-</b>
+                    <input
+                        type="number"
+                        id="Aneg"
+                        min="0"
+                        value="0"
+                    >
+                    <span>Units</span>
+                </div>
+
+                <div class="blood-item">
+                    <b>B+</b>
+                    <input
+                        type="number"
+                        id="Bpos"
+                        min="0"
+                        value="0"
+                    >
+                    <span>Units</span>
+                </div>
+
+                <div class="blood-item">
+                    <b>B-</b>
+                    <input
+                        type="number"
+                        id="Bneg"
+                        min="0"
+                        value="0"
+                    >
+                    <span>Units</span>
+                </div>
+
+                <div class="blood-item">
+                    <b>AB+</b>
+                    <input
+                        type="number"
+                        id="ABpos"
+                        min="0"
+                        value="0"
+                    >
+                    <span>Units</span>
+                </div>
+
+                <div class="blood-item">
+                    <b>AB-</b>
+                    <input
+                        type="number"
+                        id="ABneg"
+                        min="0"
+                        value="0"
+                    >
+                    <span>Units</span>
+                </div>
+
+                <div class="blood-item">
+                    <b>O+</b>
+                    <input
+                        type="number"
+                        id="Opos"
+                        min="0"
+                        value="0"
+                    >
+                    <span>Units</span>
+                </div>
+
+                <div class="blood-item">
+                    <b>O-</b>
+                    <input
+                        type="number"
+                        id="Oneg"
+                        min="0"
+                        value="0"
+                    >
+                    <span>Units</span>
+                </div>
+
+            </div>
+
+
+            <button
+                class="primary-btn"
+                id="saveInventory"
+            >
+                💾 Save Blood Inventory
+            </button>
+
+
+            <div
+                id="inventoryMessage"
+                class="success-message"
+            ></div>
+
+        </div>
+
+
+        <!-- SEARCH -->
+
+        <div class="card">
+
+            <button
+                class="back-btn"
+                id="backToInventory"
+            >
+                ↑ Back to Blood Inventory
+            </button>
+
+            <h2>Find Blood Availability</h2>
+
+            <div class="form-grid">
+
+                <div class="input-group">
+
+                    <label>
+                        Blood Group
+                    </label>
+
+                    <select id="searchBlood">
+
+                        <option value="">
+                            Select
+                        </option>
+
+                        <option>A+</option>
+                        <option>A-</option>
+                        <option>B+</option>
+                        <option>B-</option>
+                        <option>AB+</option>
+                        <option>AB-</option>
+                        <option>O+</option>
+                        <option>O-</option>
+
+                    </select>
 
                 </div>
 
 
-                <div class="card">
+                <div class="input-group">
 
-                    <h2>Blood Request</h2>
+                    <label>
+                        District
+                    </label>
 
-
-                    <div class="form-grid">
-
-                        <div class="input-group">
-
-                            <label>
-                                Required Blood Group
-                            </label>
-
-                            <select id="requiredGroup">
-
-                                <option value="">
-                                    Select Blood Group
-                                </option>
-
-                                <option>A+</option>
-                                <option>A-</option>
-
-                                <option>B+</option>
-                                <option>B-</option>
-
-                                <option>AB+</option>
-                                <option>AB-</option>
-
-                                <option>O+</option>
-                                <option>O-</option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="input-group">
-
-                            <label>
-                                Required Units
-                            </label>
-
-                            <input
-                                id="units"
-                                type="number"
-                                min="1"
-                                max="20"
-                                value="1"
-                            >
-
-                        </div>
-
-
-                        <div class="input-group">
-
-                            <label>
-                                Hospital Name
-                            </label>
-
-                            <input
-                                id="hospital"
-                                placeholder="Hospital name"
-                            >
-
-                        </div>
-
-
-                        <div class="input-group">
-
-                            <label>
-                                District
-                            </label>
-
-                            <input
-                                id="patientDistrict"
-                                placeholder="District"
-                            >
-
-                        </div>
-
-
-                        <div class="input-group">
-
-                            <label>
-                                Urgency
-                            </label>
-
-                            <select id="urgency">
-
-                                <option>Normal</option>
-
-                                <option>
-                                    Urgent
-                                </option>
-
-                                <option>
-                                    Emergency
-                                </option>
-
-                            </select>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="input-group">
-
-                        <label>
-                            Additional Information
-                        </label>
-
-                        <textarea
-                            id="note"
-                            placeholder="Additional information"
-                        ></textarea>
-
-                    </div>
-
-
-                    <button
-                        class="primary-btn"
-                        id="findDonors"
+                    <input
+                        id="searchDistrict"
+                        placeholder="District"
                     >
-
-                        🔎 Find Matching Donors
-
-                    </button>
-
-
-                    <div id="matchResult"></div>
 
                 </div>
 
             </div>
 
-        </section>
 
+            <button
+                class="primary-btn"
+                id="searchBank"
+            >
+                🔎 Search Availability
+            </button>
 
-        <!-- ================= BLOOD BANK ================= -->
 
-        <section id="bloodBankScreen" class="screen">
+            <div id="bankSearchResult"></div>
 
-            <div class="dashboard">
+        </div>
 
-                <div class="dashboard-header">
+    </div>
 
-                    <div>
+</section>
 
-                        <h1>🏦 Blood Bank Dashboard</h1>
+</main>
 
-                        <p>
-                            Register and manage blood availability.
-                        </p>
 
-                    </div>
+<footer>
 
-                    <button
-                        class="logout-btn"
-                        id="bankLogout"
-                    >
-                        Logout
-                    </button>
+    <p>
+        © 2026 SmartBlood | Hackathon Demo Project
+    </p>
 
-                </div>
+    <p>
+        Frontend demonstration only.
+    </p>
 
+</footer>
 
-                <!-- BANK REGISTRATION -->
 
-                <div class="card">
-
-                    <h2>Blood Bank Registration</h2>
-
-                    <div class="form-grid">
-
-                        <div class="input-group">
-
-                            <label>
-                                Blood Bank Name
-                            </label>
-
-                            <input
-                                id="bankName"
-                                placeholder="Enter blood bank name"
-                                required
-                            >
-
-                        </div>
-
-
-                        <div class="input-group">
-
-                            <label>
-                                Registration / License ID
-                            </label>
-
-                            <input
-                                id="bankLicense"
-                                placeholder="License ID"
-                            >
-
-                        </div>
-
-
-                        <div class="input-group">
-
-                            <label>
-                                Contact Number
-                            </label>
-
-                            <input
-                                id="bankContact"
-                                placeholder="Phone number"
-                            >
-
-                        </div>
-
-
-                        <div class="input-group">
-
-                            <label>
-                                Email
-                            </label>
-
-                            <input
-                                id="bankEmail"
-                                type="email"
-                                placeholder="Email"
-                            >
-
-                        </div>
-
-
-                        <div class="input-group">
-
-                            <label>
-                                District
-                            </label>
-
-                            <input
-                                id="bankDistrict"
-                                placeholder="District"
-                            >
-
-                        </div>
-
-
-                        <div class="input-group">
-
-                            <label>
-                                Working Hours
-                            </label>
-
-                            <input
-                                id="bankHours"
-                                placeholder="Example: 24/7"
-                            >
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="input-group">
-
-                        <label>
-                            Blood Bank Address
-                        </label>
-
-                        <textarea
-                            id="bankAddress"
-                            placeholder="Full address"
-                        ></textarea>
-
-                    </div>
-
-
-                    <button
-                        class="primary-btn"
-                        id="registerBank"
-                    >
-
-                        🏦 Register Blood Bank
-
-                    </button>
-
-
-                    <div
-                        id="bankMessage"
-                        class="success-message"
-                    ></div>
-
-                </div>
-
-
-                <!-- BLOOD INVENTORY -->
-
-                <div class="card">
-
-                    <h2>Blood Inventory</h2>
-
-                    <p class="subtitle">
-                        Enter available blood units.
-                    </p>
-
-
-                    <div class="blood-grid">
-
-                        <div class="blood-item">
-                            <b>A+</b>
-                            <input type="number" id="Apos" min="0" value="0">
-                            <span>Units</span>
-                        </div>
-
-                        <div class="blood-item">
-                            <b>A-</b>
-                            <input type="number" id="Aneg" min="0" value="0">
-                            <span>Units</span>
-                        </div>
-
-                        <div class="blood-item">
-                            <b>B+</b>
-                            <input type="number" id="Bpos" min="0" value="0">
-                            <span>Units</span>
-                        </div>
-
-                        <div class="blood-item">
-                            <b>B-</b>
-                            <input type="number" id="Bneg" min="0" value="0">
-                            <span>Units</span>
-                        </div>
-
-                        <div class="blood-item">
-                            <b>AB+</b>
-                            <input type="number" id="ABpos" min="0" value="0">
-                            <span>Units</span>
-                        </div>
-
-                        <div class="blood-item">
-                            <b>AB-</b>
-                            <input type="number" id="ABneg" min="0" value="0">
-                            <span>Units</span>
-                        </div>
-
-                        <div class="blood-item">
-                            <b>O+</b>
-                            <input type="number" id="Opos" min="0" value="0">
-                            <span>Units</span>
-                        </div>
-
-                        <div class="blood-item">
-                            <b>O-</b>
-                            <input type="number" id="Oneg" min="0" value="0">
-                            <span>Units</span>
-                        </div>
-
-                    </div>
-
-
-                    <button
-                        class="primary-btn"
-                        id="saveInventory"
-                    >
-
-                        💾 Save Blood Inventory
-
-                    </button>
-
-
-                    <div
-                        id="inventoryMessage"
-                        class="success-message"
-                    ></div>
-
-                </div>
-
-
-                <!-- SEARCH BLOOD BANK -->
-
-                <div class="card">
-
-                    <h2>Find Blood Availability</h2>
-
-                    <div class="form-grid">
-
-                        <div class="input-group">
-
-                            <label>
-                                Blood Group
-                            </label>
-
-                            <select id="searchBlood">
-
-                                <option value="">
-                                    Select
-                                </option>
-
-                                <option>A+</option>
-                                <option>A-</option>
-
-                                <option>B+</option>
-                                <option>B-</option>
-
-                                <option>AB+</option>
-                                <option>AB-</option>
-
-                                <option>O+</option>
-                                <option>O-</option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="input-group">
-
-                            <label>
-                                District
-                            </label>
-
-                            <input
-                                id="searchDistrict"
-                                placeholder="District"
-                            >
-
-                        </div>
-
-                    </div>
-
-
-                    <button
-                        class="primary-btn"
-                        id="searchBank"
-                    >
-
-                        🔎 Search Availability
-
-                    </button>
-
-
-                    <div id="bankSearchResult"></div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <footer>
-
-        <p>
-            © 2026 SmartBlood | Hackathon Demo Project
-        </p>
-
-        <p>
-            For demonstration purposes only.
-        </p>
-
-    </footer>
-
-
-    <script src="script.js"></script>
+<script src="script.js"></script>
 
 </body>
 </html>
