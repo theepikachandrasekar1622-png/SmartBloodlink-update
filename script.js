@@ -1,390 +1,693 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+/* =========================================
+   SMARTBLOOD APPLICATION
+========================================= */
+
+const $ = (id) => document.getElementById(id);
+
+
+/* =========================================
+   SCREENS
+========================================= */
+
+const screens = [
+    "registerScreen",
+    "roleScreen",
+    "donorScreen",
+    "patientScreen",
+    "bloodBankScreen"
+];
+
+
+function showScreen(screenId) {
+
+    screens.forEach((id) => {
+
+        $(id).classList.remove("active");
+
+    });
+
+    $(screenId).classList.add("active");
+
+    window.scrollTo(0, 0);
+
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background: #f5f7fb;
-    color: #20242a;
+
+/* =========================================
+   PROFILE
+========================================= */
+
+let profile =
+    JSON.parse(
+        localStorage.getItem("smartBloodProfile")
+    ) || null;
+
+
+function getValue(id) {
+
+    return $(id).value.trim();
+
 }
 
-/* HEADER */
 
-.header {
-    background: #b71c1c;
-    color: white;
-    padding: 18px 6%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+function escapeHTML(value) {
+
+    return String(value || "")
+        .replace(/[&<>"']/g, function(character) {
+
+            const map = {
+
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#039;"
+
+            };
+
+            return map[character];
+
+        });
+
 }
 
-.logo {
-    font-size: 26px;
-    font-weight: bold;
+
+/* =========================================
+   REGISTER
+========================================= */
+
+$("registerForm").addEventListener(
+    "submit",
+    function(event) {
+
+        event.preventDefault();
+
+
+        profile = {
+
+            name: getValue("name"),
+
+            age: getValue("age"),
+
+            gender: getValue("gender"),
+
+            height: getValue("height"),
+
+            weight: getValue("weight"),
+
+            contact: getValue("contact"),
+
+            bloodGroup: getValue("bloodGroup"),
+
+            address: getValue("address"),
+
+            district: getValue("district"),
+
+            healthIssues:
+                getValue("healthIssues") || "None"
+
+        };
+
+
+        localStorage.setItem(
+            "smartBloodProfile",
+            JSON.stringify(profile)
+        );
+
+
+        showScreen("roleScreen");
+
+    }
+);
+
+
+/* =========================================
+   ROLE BUTTONS
+========================================= */
+
+$("donorBtn").onclick = function() {
+
+    loadProfile();
+
+    showScreen("donorScreen");
+
+};
+
+
+$("patientBtn").onclick = function() {
+
+    loadProfile();
+
+    showScreen("patientScreen");
+
+};
+
+
+$("bloodBankBtn").onclick = function() {
+
+    loadProfile();
+
+    showScreen("bloodBankScreen");
+
+};
+
+
+/* =========================================
+   BACK BUTTONS
+========================================= */
+
+$("backRegister").onclick = function() {
+
+    showScreen("registerScreen");
+
+};
+
+
+$("backFromDonor").onclick = function() {
+
+    showScreen("roleScreen");
+
+};
+
+
+$("backFromPatient").onclick = function() {
+
+    showScreen("roleScreen");
+
+};
+
+
+$("backFromBank").onclick = function() {
+
+    showScreen("roleScreen");
+
+};
+
+
+/* Blood Bank internal navigation */
+
+$("backToBankTop").onclick = function() {
+
+    document
+        .getElementById("bankName")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+};
+
+
+$("backToInventory").onclick = function() {
+
+    document
+        .getElementById("saveInventory")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+};
+
+
+/* =========================================
+   LOAD PROFILE
+========================================= */
+
+function loadProfile() {
+
+    if (!profile) return;
+
+
+    $("donorProfile").innerHTML = `
+
+        <b>Name:</b>
+        ${escapeHTML(profile.name)}
+
+        <br>
+
+        <b>Age:</b>
+        ${escapeHTML(profile.age)}
+
+        <br>
+
+        <b>Gender:</b>
+        ${escapeHTML(profile.gender)}
+
+        <br>
+
+        <b>Blood Group:</b>
+
+        <span class="badge">
+            ${escapeHTML(profile.bloodGroup)}
+        </span>
+
+        <br>
+
+        <b>Height:</b>
+        ${escapeHTML(profile.height)} cm
+
+        <br>
+
+        <b>Weight:</b>
+        ${escapeHTML(profile.weight)} kg
+
+        <br>
+
+        <b>District:</b>
+        ${escapeHTML(profile.district)}
+
+        <br>
+
+        <b>Contact:</b>
+        ${escapeHTML(profile.contact)}
+
+    `;
+
+
+    $("patientDistrict").value =
+        profile.district;
+
 }
 
-.status {
-    font-size: 13px;
-}
 
-/* SCREEN */
+/* =========================================
+   DONOR
+========================================= */
 
-.screen {
-    display: none;
-    min-height: 85vh;
-    padding: 35px 15px;
-}
+$("saveDonor").onclick = function() {
 
-.screen.active {
-    display: block;
-}
+    const donorData = {
 
-/* HERO */
+        availability:
+            getValue("availability"),
 
-.hero {
-    text-align: center;
-    max-width: 850px;
-    margin: auto auto 25px;
-}
+        area:
+            getValue("donorArea")
 
-.hero-icon {
-    font-size: 55px;
-}
+    };
 
-.hero h1 {
-    font-size: 36px;
-    margin: 10px;
-    color: #b71c1c;
-}
 
-.hero p {
-    color: #666;
-}
+    localStorage.setItem(
+        "smartBloodDonor",
+        JSON.stringify(donorData)
+    );
 
-/* CARD */
 
-.card {
-    max-width: 950px;
-    margin: 20px auto;
-    background: white;
-    padding: 30px;
-    border-radius: 18px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-}
+    $("donorMessage").style.display =
+        "block";
 
-.card h2 {
-    margin-bottom: 8px;
-    color: #b71c1c;
-}
 
-.subtitle {
-    color: #777;
-    margin-bottom: 20px;
-}
+    $("donorMessage").textContent =
+        "✓ Donor profile saved successfully!";
 
-/* FORM */
+};
 
-.form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-}
 
-.input-group {
-    margin-bottom: 15px;
-}
+/* =========================================
+   BLOOD COMPATIBILITY
+========================================= */
 
-.input-group label {
-    display: block;
-    font-weight: bold;
-    font-size: 14px;
-    margin-bottom: 7px;
-}
+const compatibility = {
 
-input,
-select,
-textarea {
-    width: 100%;
-    padding: 13px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    font-size: 15px;
-    outline: none;
-}
+    "A+": ["A+", "A-", "O+", "O-"],
 
-input:focus,
-select:focus,
-textarea:focus {
-    border-color: #b71c1c;
-}
+    "A-": ["A-", "O-"],
 
-textarea {
-    min-height: 85px;
-    resize: vertical;
-}
+    "B+": ["B+", "B-", "O+", "O-"],
 
-/* MAIN BUTTON */
+    "B-": ["B-", "O-"],
 
-.primary-btn {
-    width: 100%;
-    padding: 15px;
-    border: none;
-    border-radius: 10px;
-    background: #b71c1c;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 10px;
-}
+    "AB+": [
+        "A+",
+        "A-",
+        "B+",
+        "B-",
+        "AB+",
+        "AB-",
+        "O+",
+        "O-"
+    ],
 
-.primary-btn:hover {
-    background: #8e1515;
-}
+    "AB-": [
+        "A-",
+        "B-",
+        "AB-",
+        "O-"
+    ],
 
-/* BACK BUTTON */
+    "O+": [
+        "O+",
+        "O-"
+    ],
 
-.back-btn {
-    border: none;
-    background: transparent;
-    color: #b71c1c;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 14px;
-    margin-bottom: 18px;
-}
+    "O-": [
+        "O-"
+    ]
 
-.back-btn:hover {
-    text-decoration: underline;
-}
+};
 
-/* ROLE */
 
-.role-card {
-    text-align: center;
-    max-width: 1000px;
-}
+/* =========================================
+   PATIENT SEARCH
+========================================= */
 
-.section-icon {
-    font-size: 45px;
-}
+$("findDonors").onclick = function() {
 
-.role-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin: 30px 0;
-}
+    const bloodGroup =
+        getValue("requiredGroup");
 
-.role-box {
-    padding: 30px 20px;
-    background: white;
-    border-radius: 18px;
-    cursor: pointer;
-    border: 2px solid #eee;
-    transition: 0.2s;
-}
+    const units =
+        getValue("units");
 
-.role-box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-}
+    const hospital =
+        getValue("hospital");
 
-.role-icon {
-    font-size: 48px;
-}
+    const district =
+        getValue("patientDistrict");
 
-.role-box h2 {
-    margin: 12px;
-}
+    const urgency =
+        getValue("urgency");
 
-.role-box p {
-    color: #777;
-    line-height: 1.5;
-}
 
-.donor-box {
-    border-color: #e57373;
-}
+    if (
+        !bloodGroup ||
+        !hospital ||
+        !district
+    ) {
 
-.patient-box {
-    border-color: #64b5f6;
-}
+        alert(
+            "Please fill Blood Group, Hospital and District."
+        );
 
-.bank-box {
-    border-color: #81c784;
-}
+        return;
 
-/* DASHBOARD */
-
-.dashboard {
-    max-width: 1100px;
-    margin: auto;
-}
-
-.dashboard-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 950px;
-    margin: auto;
-}
-
-.dashboard-header h1 {
-    color: #b71c1c;
-}
-
-.dashboard-header p {
-    color: #777;
-    margin-top: 5px;
-}
-
-.logout-btn {
-    padding: 10px 18px;
-    border: 1px solid #b71c1c;
-    color: #b71c1c;
-    background: white;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-/* PROFILE */
-
-.profile-box {
-    padding: 18px;
-    background: #f8f8f8;
-    border-radius: 12px;
-    line-height: 1.8;
-    margin: 15px 0;
-}
-
-.badge {
-    background: #ffe1e1;
-    color: #b71c1c;
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-weight: bold;
-}
-
-/* SUCCESS */
-
-.success-message {
-    display: none;
-    background: #e7f7eb;
-    color: #176b35;
-    padding: 14px;
-    margin-top: 15px;
-    border-radius: 10px;
-    font-weight: bold;
-}
-
-/* BLOOD INVENTORY */
-
-.blood-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-    margin: 20px 0;
-}
-
-.blood-item {
-    text-align: center;
-    background: #fafafa;
-    border: 1px solid #eee;
-    padding: 18px;
-    border-radius: 12px;
-}
-
-.blood-item b {
-    display: block;
-    font-size: 25px;
-    color: #b71c1c;
-    margin-bottom: 10px;
-}
-
-.blood-item input {
-    text-align: center;
-}
-
-.blood-item span {
-    display: block;
-    color: #777;
-    font-size: 12px;
-    margin-top: 5px;
-}
-
-/* RESULT */
-
-.result-card {
-    margin-top: 20px;
-    padding: 20px;
-    background: #f8f9fa;
-    border-radius: 12px;
-    border-left: 5px solid #b71c1c;
-}
-
-.result-card h3 {
-    color: #b71c1c;
-    margin-bottom: 8px;
-}
-
-/* FOOTER */
-
-footer {
-    background: #20242a;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    font-size: 13px;
-}
-
-footer p {
-    margin: 5px;
-}
-
-/* MOBILE */
-
-@media (max-width: 750px) {
-
-    .form-grid {
-        grid-template-columns: 1fr;
     }
 
-    .role-grid {
-        grid-template-columns: 1fr;
+
+    const compatible =
+        compatibility[bloodGroup];
+
+
+    $("matchResult").innerHTML = `
+
+        <div class="result-card">
+
+            <h3>
+                🔎 Blood Matching Result
+            </h3>
+
+            <p>
+                <b>Required Blood:</b>
+                ${escapeHTML(bloodGroup)}
+            </p>
+
+            <p>
+                <b>Required Units:</b>
+                ${escapeHTML(units)}
+            </p>
+
+            <p>
+                <b>Hospital:</b>
+                ${escapeHTML(hospital)}
+            </p>
+
+            <p>
+                <b>District:</b>
+                ${escapeHTML(district)}
+            </p>
+
+            <p>
+                <b>Urgency:</b>
+                ${escapeHTML(urgency)}
+            </p>
+
+            <p>
+                <b>Compatible Groups:</b>
+                ${compatible.join(", ")}
+            </p>
+
+            <br>
+
+            <p>
+                ⚠️ Demo mode:
+                Firebase can be connected later
+                for real donor matching.
+            </p>
+
+        </div>
+
+    `;
+
+};
+
+
+/* =========================================
+   BLOOD BANK REGISTRATION
+========================================= */
+
+$("registerBank").onclick = function() {
+
+    const bank = {
+
+        name:
+            getValue("bankName"),
+
+        license:
+            getValue("bankLicense"),
+
+        contact:
+            getValue("bankContact"),
+
+        email:
+            getValue("bankEmail"),
+
+        district:
+            getValue("bankDistrict"),
+
+        hours:
+            getValue("bankHours"),
+
+        address:
+            getValue("bankAddress")
+
+    };
+
+
+    if (
+        !bank.name ||
+        !bank.contact ||
+        !bank.district
+    ) {
+
+        alert(
+            "Please enter Blood Bank Name, Contact and District."
+        );
+
+        return;
+
     }
 
-    .blood-grid {
-        grid-template-columns: repeat(2, 1fr);
+
+    localStorage.setItem(
+        "smartBloodBank",
+        JSON.stringify(bank)
+    );
+
+
+    $("bankMessage").style.display =
+        "block";
+
+
+    $("bankMessage").textContent =
+        "✓ Blood Bank registered successfully!";
+
+};
+
+
+/* =========================================
+   BLOOD INVENTORY
+========================================= */
+
+$("saveInventory").onclick = function() {
+
+    const inventory = {
+
+        "A+": getValue("Apos"),
+
+        "A-": getValue("Aneg"),
+
+        "B+": getValue("Bpos"),
+
+        "B-": getValue("Bneg"),
+
+        "AB+": getValue("ABpos"),
+
+        "AB-": getValue("ABneg"),
+
+        "O+": getValue("Opos"),
+
+        "O-": getValue("Oneg")
+
+    };
+
+
+    localStorage.setItem(
+        "smartBloodInventory",
+        JSON.stringify(inventory)
+    );
+
+
+    $("inventoryMessage").style.display =
+        "block";
+
+
+    $("inventoryMessage").textContent =
+        "✓ Blood inventory updated successfully!";
+
+};
+
+
+/* =========================================
+   BLOOD BANK SEARCH
+========================================= */
+
+$("searchBank").onclick = function() {
+
+    const group =
+        getValue("searchBlood");
+
+    const district =
+        getValue("searchDistrict");
+
+
+    if (!group || !district) {
+
+        alert(
+            "Select Blood Group and District."
+        );
+
+        return;
+
     }
 
-    .dashboard-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
+
+    const bank =
+        JSON.parse(
+            localStorage.getItem(
+                "smartBloodBank"
+            )
+        );
+
+
+    const inventory =
+        JSON.parse(
+            localStorage.getItem(
+                "smartBloodInventory"
+            )
+        );
+
+
+    if (!bank || !inventory) {
+
+        $("bankSearchResult").innerHTML = `
+
+            <div class="result-card">
+
+                <h3>
+                    🏦 Blood Bank Search
+                </h3>
+
+                <p>
+                    No blood bank inventory
+                    registered in this demo yet.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
     }
 
-    .hero h1 {
-        font-size: 28px;
-    }
 
-    .card {
-        padding: 20px;
-    }
+    const units =
+        inventory[group] || 0;
+
+
+    $("bankSearchResult").innerHTML = `
+
+        <div class="result-card">
+
+            <h3>
+                🏦 Blood Availability
+            </h3>
+
+            <p>
+                <b>Blood Bank:</b>
+                ${escapeHTML(bank.name)}
+            </p>
+
+            <p>
+                <b>District:</b>
+                ${escapeHTML(bank.district)}
+            </p>
+
+            <p>
+                <b>Blood Group:</b>
+                ${escapeHTML(group)}
+            </p>
+
+            <p>
+                <b>Available Units:</b>
+                ${escapeHTML(units)}
+            </p>
+
+            <p>
+                <b>Contact:</b>
+                ${escapeHTML(bank.contact)}
+            </p>
+
+        </div>
+
+    `;
+
+};
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+function logout() {
+
+    localStorage.removeItem(
+        "smartBloodProfile"
+    );
+
+    profile = null;
+
+    showScreen("registerScreen");
 
 }
 
-@media (max-width: 450px) {
 
-    .blood-grid {
-        grid-template-columns: 1fr 1fr;
-    }
+$("donorLogout").onclick = logout;
 
-    .logo {
-        font-size: 21px;
-    }
+$("patientLogout").onclick = logout;
+
+$("bankLogout").onclick = logout;
+
+
+/* =========================================
+   START APP
+========================================= */
+
+if (profile) {
+
+    showScreen("roleScreen");
+
+} else {
+
+    showScreen("registerScreen");
 
 }
